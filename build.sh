@@ -21,7 +21,7 @@ else
     echo "Building dev"
 fi
 
-docker build --no-cache --build-arg VERSION=$VERSION -t deasmi/unraid-tailscale:${FULL_TAG} .
+docker build --no-cache --build-arg VERSION=$VERSION -t kerwood/unraid-tailscale:${FULL_TAG} .
 
 ret=$?
 if [ $ret -ne 0 ]; then
@@ -29,13 +29,13 @@ if [ $ret -ne 0 ]; then
 	exit 1;
 fi
 
-docker tag deasmi/unraid-tailscale:${FULL_TAG} deasmi/unraid-tailscale:${SHORT_TAG}
+docker tag kerwood/unraid-tailscale:${FULL_TAG} kerwood/unraid-tailscale:${SHORT_TAG}
 
 if [ $DEV_BUILD != 1 ];
 then
-   docker tag deasmi/unraid-tailscale:${FULL_TAG} deasmi/unraid-tailscale:latest
+   docker tag kerwood/unraid-tailscale:${FULL_TAG} kerwood/unraid-tailscale:latest
 else
-    docker push deasmi/unraid-tailscale:${FULL_TAG}
-    docker push deasmi/unraid-tailscale:${SHORT_TAG}
+    docker push kerwood/unraid-tailscale:${FULL_TAG}
+    docker push kerwood/unraid-tailscale:${SHORT_TAG}
 fi
 
