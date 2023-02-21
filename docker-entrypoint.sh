@@ -26,6 +26,12 @@ if [ "${ENABLE_DOWNLOADS}" = "TRUE" ]; then
     /app/tailscale file get -wait=true -conflict=rename -loop=true /downloads &
 fi
 
+sleep 5
+
+EXIST=`ip route show 100.64.0.0/10 | wc -l`
+if [ $EXIST -eq 0 ]; then
+    ip route add 100.64.0.0/10 dev tailscale0
+fi
 
 # Do nothing until the end of time
 sleep infinity
